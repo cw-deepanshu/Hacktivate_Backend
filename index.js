@@ -26,9 +26,9 @@ app.post("/upload", upload, (req, res) => {
         return res.status(400).send("No files were uploaded.");
     }
 
-    // Access the file using req.file
-    console.log(req.file);
-
+    // Current language type
+    const lang = req.body.language;
+    console.log(lang);
     // Respond with success message or do other processing
     res.send("File uploaded successfully.");
 });
