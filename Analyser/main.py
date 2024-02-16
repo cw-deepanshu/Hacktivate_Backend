@@ -72,7 +72,7 @@ if lang=="Hindi":
 else:
     language = "en"
 translation = get_translation(language,input[1])
-print(translation)
+# print(translation)
 doc = nlp_ner(translation)
 colors = {"MAKENAME": "#F67DE3", "USERREVIEWS": "#7DF6D9", "MODELNAME": "#a6e22d"}
 options = {"ents": ["MAKENAME", "USERREVIEWS", "MODELNAME"], "colors": colors}
@@ -84,3 +84,5 @@ from spacy import displacy
 html = displacy.render(doc, style="ent", options=options)
 with open("data_vis.html", "w", encoding="utf-8") as f:
     f.write(html)
+
+print(html)

@@ -4,6 +4,7 @@ const multer = require("multer");
 const cors = require("cors");
 
 const app = express();
+let filename;
 
 app.use(cors());
 app.use(express.static("./uploads"));
@@ -13,7 +14,9 @@ const storage = multer.diskStorage({
         cb(null, "./uploads"); // Set your upload directory
     },
     filename: (req, file, cb) => {
-        cb(null,file.originalname); // Set filename
+        filename=`${Date.now()}.${file.originalname}`
+        cb(null,filename); // Set filename
+
     }
 });
 
@@ -34,12 +37,14 @@ app.post("/upload", upload, (req, res) => {
     console.log(lang);
     console.log(file.originalname);
     // Respond with success message or do other processing
-    res.send("File uploaded successfully.");
+    // res.send("File uploaded successfully.");
 
 
-    const data = [lang,file.originalname]
+    const data = [lang,filename]
     const python_process = spawner('python', ['Analyser\\main.py', JSON.stringify(data)]);
     python_process.stdout.on('data', (data) => {
+        res.setHeader('Content-Type', 'text/html')
+        res.send(data)
         console.log(`Python Script Output: ${data}`);
       });
       python_process.stderr.on('data', (error) => {
@@ -49,6 +54,8 @@ app.post("/upload", upload, (req, res) => {
       python_process.on('close', (code) => {
         console.log(`Python Script Exited with Code: ${code}`);
       });
+
+      
 });
 
 const PORT = 5000;

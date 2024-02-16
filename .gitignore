@@ -1,3 +1,7 @@
 /node_modules
 /Analyser/model-best
 /Analyser/model-last
+/uploads
+/train.spacy
+/data_vis.html
+/Analyser/__pycache__/transcription.cpython-311.pyc
