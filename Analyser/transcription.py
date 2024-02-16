@@ -36,7 +36,11 @@ def get_transcript_text(lang,filename):
     transcriber = aai.Transcriber(config=config)
 
     # Transcribe audio file
-    transcript = transcriber.transcribe("\\uploads\\"+filename)
+    import os
+    from pathlib import Path
+
+    model_path = Path(__file__).parent.parent / "uploads"
+    transcript = transcriber.transcribe(str(model_path)+"\\"+filename)
 
     # Return transcript text
     return transcript.text

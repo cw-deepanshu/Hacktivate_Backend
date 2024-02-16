@@ -53,8 +53,13 @@ for training_example  in tqdm(training_data):
 
 doc_bin.to_disk("train.spacy") 
 
+import os
+from pathlib import Path
 
-nlp_ner = spacy.load("/model-best")
+model_path = Path(__file__).parent / "model-best"
+nlp_ner = spacy.load(model_path)
+# rel_path = os.path.relpath("model-best")
+# nlp_ner = spacy.load(rel_path)
 
 from translation import get_translation
 
