@@ -16,6 +16,7 @@
 # print(transcript.text)
 # print(transcript.words)
 
+
 import assemblyai as aai
 # from Hacktivate_Frontend.src import FileUpload
 
@@ -42,11 +43,42 @@ def get_transcript_text(lang,filename):
     model_path = Path(__file__).parent.parent / "uploads"
     transcript = transcriber.transcribe(str(model_path)+"\\"+filename)
 
+
     # Return transcript text
     return transcript.text
 
 # Example usage:
 # transcript_text = get_transcript_text()
 # print("Transcript Text:", transcript_text)
+
+# google api for transcription
+#import library
+#import speech_recognition as sr
+
+# Initialize recognizer class (for recognizing the speech)
+#r = sr.Recognizer()
+# def get_transcript_text(lang,filename):
+#     import os
+#     from pathlib import Path
+
+#     model_path = Path(__file__).parent.parent / "uploads"
+#     path=str(model_path)+"\\"+filename
+#     text = "null"
+#     with sr.AudioFile(path) as source:
+#         #print('Fetching File')
+#         audio_text = r.listen(source)
+#         # recoginize_() method will throw a request error if the API is unreachable, hence using exception handling
+#         try:
+        
+#             # using google speech recognition
+#             #print('Converting audio transcripts into text ...')
+#             text = r.recognize_google(audio_text, language = lang)
+#             #print(text)
+    
+#         except:
+#             text = "sorry try again"
+#             #print('Sorry.. run again...')
+#     return text
+
 
 

@@ -61,7 +61,8 @@ nlp_ner = spacy.load(model_path)
 # rel_path = os.path.relpath("model-best")
 # nlp_ner = spacy.load(rel_path)
 
-from translation import get_translation
+#from translation import get_translation
+from transcription import get_transcript_text
 
 input = ast.literal_eval(sys.argv[1])
 # input = ["Hindi","HindiAudio.mp4"]
@@ -71,8 +72,11 @@ if lang=="Hindi":
     language = "hi"
 else:
     language = "en"
-translation = get_translation(language,input[1])
+#translation = get_translation(language,input[1])
+translation = get_transcript_text(language,input[1])
 # print(translation)
+# translation = "I drive a Honda Civic, and the fuel economy seems lower than expected. Any suggestions? Hi! Regular maintenance is key. Ensure your Civic is serviced as per the manual. Also, check tire pressure and consider using the recommended fuel for optimal performance. That makes sense. By the way, the Civic's infotainment system occasionally freezes. Any quick fixes? Try a system reset by holding down the power button for 10 seconds. If it persists, we may need to investigate further. Please keep us updated. I'll give that a shot. Thanks! And, how can I access the latest software updates for my Civic? Visit the official Honda website, navigate to 'Owner Resources,' and check for software updates using your Civic's VIN."
+
 doc = nlp_ner(translation)
 colors = {"MAKENAME": "#F67DE3", "USERREVIEWS": "#7DF6D9", "MODELNAME": "#a6e22d"}
 options = {"ents": ["MAKENAME", "USERREVIEWS", "MODELNAME"], "colors": colors}
