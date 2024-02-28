@@ -7,6 +7,8 @@ nlp = spacy.load("en_core_web_lg")
 import json
 import os
 
+from flask import Flask, jsonify
+
 # Get the directory of the current script
 current_dir = os.path.dirname(__file__)
 
@@ -90,3 +92,10 @@ with open("data_vis.html", "w", encoding="utf-8") as f:
     f.write(html)
 
 print(html)
+
+app = Flask(__name__)
+
+@app.route('/get_html_data', methods=['GET'])
+def get_html_data():
+    # Generate or fetch HTML data
+    return jsonify({'htmlData': html})

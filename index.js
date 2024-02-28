@@ -1,5 +1,5 @@
 const express = require("express");
-const spawner = require('child_process').spawn;
+// const spawner = require('child_process').spawn;
 const multer = require("multer");
 const cors = require("cors");
 
@@ -28,7 +28,7 @@ let upload = multer({
 // Route to handle file upload
 app.post("/upload", upload, (req, res) => {
     if (!req.file) {
-        return res.status(400).send("No files were uploaded.");
+        return res.status(400).sendStatus("No files were uploaded.");
     }
 
     // Current language type
@@ -40,20 +40,22 @@ app.post("/upload", upload, (req, res) => {
     // res.send("File uploaded successfully.");
 
 
-    const data = [lang,filename]
-    const python_process = spawner('python', ['Analyser\\main.py', JSON.stringify(data)]);
-    python_process.stdout.on('data', (data) => {
-        res.setHeader('Content-Type', 'text/html')
-        res.send(data)
-        console.log(`Python Script Output: ${data}`);
-      });
-      python_process.stderr.on('data', (error) => {
-        console.error(`Error in Python Script: ${error}`);
-      });
+    // const data = [lang,filename]
+    // const python_process = spawner('python', ['Analyser\\main.py', JSON.stringify(data)]);
+    // python_process.stdout.on('data', (data) => {
+    //     // res.setHeader('Content-Type', 'text/html')
+    //     // res.send(data)
+    //     console.log(`Python Script Output: ${data}`);
+    //   });
+    //   python_process.stderr.on('data', (error) => {
+    //     console.error(`Error in Python Script: ${error}`);
+    //   });
       
-      python_process.on('close', (code) => {
-        console.log(`Python Script Exited with Code: ${code}`);
-      });
+    //   python_process.on('close', (data) => {
+    //     res.setHeader('Content-Type', 'text/html')
+    //     res.sendStatus(data)
+    //     // console.log(`Python Script Exited with Code: ${code}`);
+    //   });
 
       
 });
